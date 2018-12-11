@@ -1,0 +1,13 @@
+server:
+  port: 8000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+spring:
+  application:
+    name: user-auth
+  profiles: test
+  datasource:
+    schema: classpath:init_database.sql
+    driverClassName: org.h2.Driver

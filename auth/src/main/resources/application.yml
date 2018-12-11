@@ -2,41 +2,5 @@ server:
   port: 8000
   profiles:
     active: dev
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-
-spring:
-  application:
-    name: user-auth
-
-  eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://discovery:8761/eureka/    # 指定注册中心的地址
-    instance:
-      preferIpAddress: true
-
----
-# 开发环境配置
-spring:
-  profiles: dev
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bazinga?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
-    username: root
-    password: 123456aB!
-    type: com.alibaba.druid.pool.DruidDataSource
-    #最大活跃数
-    maxActive: 5
-    #初始化数量
-    initialSize: 1
-    #最大连接等待超时时间
-    maxWait: 60000
----
-# 测试环境
-spring:
-  profiles: test
-  datasource:
-    schema: classpath:init_database.sql
-    driverClassName: org.h2.Driver

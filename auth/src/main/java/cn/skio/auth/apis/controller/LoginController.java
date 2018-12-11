@@ -6,6 +6,8 @@ import cn.skio.auth.application.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,13 +20,13 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
   @PostMapping
-  public LoginResponse login(@RequestBody LoginRequest loginRequest){
+  public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
     log.debug("login parameter is: " + loginRequest.getUsername() + "; " + loginRequest.getPassword());
     LoginResponse loginResponse = loginService.login(loginRequest);
-    if(loginResponse != null){
-      return loginResponse;
+    if(loginResponse != null && loginResponse.isLoginSuccess()){
+      return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }else{
-      return null;
+      return new ResponseEntity<>(loginResponse, HttpStatus.FORBIDDEN);
     }
   }
 

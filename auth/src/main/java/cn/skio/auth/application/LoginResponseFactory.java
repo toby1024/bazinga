@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 public class LoginResponseFactory {
 
   public LoginResponse create(boolean loginState, String message){
-   return LoginResponse.builder().loginState(loginState).message(message).build();
+   return LoginResponse.builder().loginSuccess(loginState).message(message).build();
   }
 
   public LoginResponse create(User user) {
-    return LoginResponse.builder().token(JWTUtil.sign(user)).loginState(true).message("success").build();
+    return LoginResponse.builder().token(JWTUtil.sign(user)).loginSuccess(true).message("success").build();
   }
 }

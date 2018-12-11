@@ -17,6 +17,6 @@ public class LoginResponse {
 
   private String token;
 
-  private boolean loginState = true;
+  private boolean loginSuccess = true;
   private String message;
 }
